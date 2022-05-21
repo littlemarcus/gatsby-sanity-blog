@@ -3,6 +3,9 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+const isProd = process.env.NODE_ENV === "production"
+const previewEnabled = (process.env.GATSBY_IS_PREVIEW || "false").toLowerCase() === "true"
+
 module.exports = {
   plugins: [
     {
@@ -11,6 +14,8 @@ module.exports = {
         projectId: process.env.SANITY_PROJECT_ID,
         dataset: process.env.SANITY_DATASET,
         token: process.env.SANITY_TOKEN,
+        watchMode: !isProd, // watchMode only in dev mode
+        overlayDrafts: !isProd || previewEnabled, // drafts in dev & Gatsby Cloud Preview
       },
     },
     "gatsby-plugin-sharp",
