@@ -7,6 +7,7 @@ const isProd = process.env.NODE_ENV === "production"
 const previewEnabled = (process.env.GATSBY_IS_PREVIEW || "false").toLowerCase() === "true"
 
 module.exports = {
+  pathPrefix: `/en`,
   plugins: [
     {
       resolve: "gatsby-source-sanity",
